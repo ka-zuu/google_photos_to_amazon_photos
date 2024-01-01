@@ -1,0 +1,5 @@
+requests
+piexif
+google-auth-oauthlib
+google-auth
+google-api-python-client

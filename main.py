@@ -6,6 +6,7 @@ from datetime import datetime
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
+import settings
 
 # If modifying these SCOPES, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/photoslibrary.readonly']
@@ -27,10 +28,10 @@ def service_auth():
     else:
       flow = InstalledAppFlow.from_client_secrets_file(
         'credentials.json', SCOPES)
-      creds = flow.run_local_server(port=0)
+      creds = flow.run_local_server(port=80, open_browser=False)
     with open('token.pickle', 'wb') as token:
       pickle.dump(creds, token)
-  return build('photoslibrary', 'v1', credentials=creds)
+  return build('photoslibrary', 'v1', credentials=creds, static_discovery=False)
 
 def download_photos(service, album_id, download_dir):
   """
@@ -84,9 +85,7 @@ def main():
     None
   """
   service = service_auth()
-  album_id = 'your_album_id'  # Replace with your Google Photos album ID
-  download_dir = 'your_download_dir'  # Replace with your download directory
-  download_photos(service, album_id, download_dir)
+  download_photos(service, ALBUM_ID, DESTINATION_DIR)
 
 if __name__ == '__main__':
   main()
