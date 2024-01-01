@@ -85,7 +85,7 @@ def main():
     None
   """
   service = service_auth()
-  download_photos(service, ALBUM_ID, DESTINATION_DIR)
+  download_photos(service, settings.ALBUM_ID, settings.DESTINATION_DIR)
 
 if __name__ == '__main__':
   main()
