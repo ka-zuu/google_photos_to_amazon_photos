@@ -162,3 +162,4 @@ cython_debug/
 credentials.json
 settings.py
 token.pickle
+log
